@@ -9,31 +9,35 @@ class Product extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: Column(
-          children: <Widget>[
-            Image.asset(imageUrl),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child:Text(title),
-            ),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: RaisedButton(
-                color: Theme.of(context).accentColor,
-                onPressed: () => Navigator.pop(context),
-                child: Text('Back'),
-              ) ,
-            ),
+    return WillPopScope(child: Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Column(
+        children: <Widget>[
+          Image.asset(imageUrl),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child:Text(title),
+          ),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: RaisedButton(
+              child: Text('Delete'),
+              color: Theme.of(context).accentColor,
+              onPressed: () => Navigator.pop(context , true),
 
-          ],
-        ),
-         /*Center(
+            ) ,
+          ),
+
+        ],
+      ),
+      /*Center(
         child: Text('On the Product Page'),
       ),*/
-        );
+    ), onWillPop: (){
+      Navigator.pop( context ,  false);
+      return Future.value(false);
+    });
   }
 }
